@@ -3,6 +3,8 @@ package com.github.gozhuyinglong.datastructures.array;
 import java.util.Arrays;
 
 /**
+ * 数组
+ *
  * @author ZhuYinglong
  * @date 2020/11/15 0015
  */
