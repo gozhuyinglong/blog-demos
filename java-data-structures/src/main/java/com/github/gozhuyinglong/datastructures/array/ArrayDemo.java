@@ -1,4 +1,4 @@
-package xyz.zyl2020.datastructures.array;
+package com.github.gozhuyinglong.datastructures.array;
 
 import java.util.Arrays;
 
