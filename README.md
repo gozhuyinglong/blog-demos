@@ -6,5 +6,5 @@
 ## Java系列
 
 ### Java数据结构与算法分析
-1. 《 [Java数据结构与算法分析之数组](https://blog.csdn.net/gozhuyinglong/article/details/109702860) 》
+1. 《 [数组](https://blog.csdn.net/gozhuyinglong/article/details/109702860) 》
 2. 《 [稀疏数组](https://blog.csdn.net/gozhuyinglong/article/details/109723684) 》
