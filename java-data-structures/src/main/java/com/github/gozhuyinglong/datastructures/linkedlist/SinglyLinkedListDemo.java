@@ -31,8 +31,7 @@ public class SinglyLinkedListDemo {
         singlyLinkedList.print();
 
         System.out.println("-----------修改节点");
-        node4.setValue("赵六2");
-        singlyLinkedList.update(node4);
+        singlyLinkedList.update(new Node(5, "赵六2"));
         singlyLinkedList.print();
 
         System.out.println("-----------按顺序添加节点");
@@ -129,9 +128,9 @@ public class SinglyLinkedListDemo {
          * @param node
          */
         public void update(Node node) {
-            Node temp = head;
+            Node temp = head.next;
             while (true) {
-                if (temp.next == null) {
+                if (temp == null) {
                     break;
                 }
                 if (temp.key == node.key) {
