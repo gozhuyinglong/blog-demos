@@ -45,8 +45,8 @@ public class DoublyLinkedListDemo {
 
     private static class DoublyLinkedList {
 
-        private Node head = null; // head节点是双链表的头部，即第一个节点
-        private Node tail = null; // tail节点是双链表的尾部，即最后一个节点
+        private Node first = null; // first节点是双链表的头部，即第一个节点
+        private Node last = null; // tail节点是双链表的尾部，即最后一个节点
 
         /**
          * 从尾部添加
@@ -54,13 +54,13 @@ public class DoublyLinkedListDemo {
          * @param node
          */
         public DoublyLinkedList addToTail(Node node) {
-            if (tail == null) {
-                head = node;
+            if (last == null) {
+                first = node;
             } else {
-                tail.next = node;
-                node.prev = tail;
+                last.next = node;
+                node.prev = last;
             }
-            tail = node;
+            last = node;
             return this;
         }
 
@@ -70,29 +70,29 @@ public class DoublyLinkedListDemo {
          * @param node
          */
         public DoublyLinkedList addOfOrder(Node node) {
-            if (head == null) {
-                head = node;
-                tail = node;
+            if (first == null) {
+                first = node;
+                last = node;
                 return this;
             }
 
             // node比头节点小，将node设为头节点
-            if (head.key > node.key) {
-                head.prev = node;
-                node.next = head;
-                head = node;
+            if (first.key > node.key) {
+                first.prev = node;
+                node.next = first;
+                first = node;
                 return this;
             }
 
             // node比尾节点大，将node设为尾节点
-            if (tail.key < node.key) {
-                tail.next = node;
-                node.prev = tail;
-                tail = node;
+            if (last.key < node.key) {
+                last.next = node;
+                node.prev = last;
+                last = node;
                 return this;
             }
 
-            Node temp = head.next;
+            Node temp = first.next;
             while (true) {
                 if (temp.key > node.key) {
                     node.next = temp;
@@ -112,13 +112,13 @@ public class DoublyLinkedListDemo {
          * @param node
          */
         public DoublyLinkedList addToHead(Node node) {
-            if (head == null) {
-                tail = node;
+            if (first == null) {
+                last = node;
             } else {
-                node.next = head;
-                head.prev = node;
+                node.next = first;
+                first.prev = node;
             }
-            head = node;
+            first = node;
             return this;
         }
 
@@ -129,10 +129,10 @@ public class DoublyLinkedListDemo {
          * @return
          */
         public Node get(int key) {
-            if (head == null) {
+            if (first == null) {
                 return null;
             }
-            Node temp = head;
+            Node temp = first;
             while (temp != null) {
                 if (temp.key == key) {
                     return temp;
@@ -148,23 +148,23 @@ public class DoublyLinkedListDemo {
          * @param node
          */
         public DoublyLinkedList remove(Node node) {
-            if (head == null) {
+            if (first == null) {
                 return this;
             }
             // 要移除的是头节点
-            if (head == node) {
-                head.next.prev = null;
-                head = head.next;
+            if (first == node) {
+                first.next.prev = null;
+                first = first.next;
                 return this;
             }
             // 要移除的是尾节点
-            if (tail == node) {
-                tail.prev.next = null;
-                tail = tail.prev;
+            if (last == node) {
+                last.prev.next = null;
+                last = last.prev;
                 return this;
             }
 
-            Node temp = head.next;
+            Node temp = first.next;
             while (temp != null) {
                 if (temp.key == node.key) {
                     temp.prev.next = temp.next;
@@ -182,11 +182,11 @@ public class DoublyLinkedListDemo {
          * @param node
          */
         public DoublyLinkedList update(Node node) {
-            if (head == null) {
+            if (first == null) {
                 return this;
             }
 
-            Node temp = head;
+            Node temp = first;
             while (temp != null) {
                 if (temp.key == node.key) {
                     temp.value = node.value;
@@ -201,10 +201,10 @@ public class DoublyLinkedListDemo {
          * 打印链表
          */
         public void print() {
-            if (head == null) {
+            if (first == null) {
                 return;
             }
-            Node temp = head;
+            Node temp = first;
             while (temp != null) {
                 System.out.println(temp);
                 temp = temp.next;
@@ -213,7 +213,7 @@ public class DoublyLinkedListDemo {
     }
 
     private static class Node {
-        private int key;
+        private final int key;
         private String value;
         private Node prev; // 指向上一节点
         private Node next; // 指向下一节点
