@@ -1,6 +1,8 @@
 package com.github.gozhuyinglong.datastructures.stack;
 
 /**
+ * 栈
+ *
  * @author ZhuYinglong
  * @date 2020/11/25 0025
  */
