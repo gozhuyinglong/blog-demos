@@ -8,17 +8,45 @@ package com.github.gozhuyinglong.datastructures.queue;
  */
 public class ArrayQueueDemo {
 
+    public static void main(String[] args) {
+        ArrayQueue queue = new ArrayQueue(5);
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        System.out.printf("取出元素: %s\n", queue.get());
+        queue.add(6);
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        queue.add(7);
+        queue.add(8);
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+        queue.add(9);
+        System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
+    }
+
 
     private static class ArrayQueue<T> {
 
-        private final int queue[]; // 存储队列数据元素
-        private int capacity; // 容量
-        private int head = -1; // 头部指针
-        private int tail = -1; // 尾部指针
+        private final T[] queue; // 存储队列数据元素
+        private final int capacity; // 容量
+        private int head = 0; // 头部指针，指向队头元素
+        private int tail = 0; // 尾部指针，指向下一个待入队元素的存储位置
 
         public ArrayQueue(int capacity) {
-            this.capacity = capacity;
-            this.queue = new int[capacity];
+            this.capacity = capacity + 1; // 环形队列需要空出一个位置，来满足队列满时head与tail不重合
+            this.queue = (T[]) new Object[this.capacity];
         }
 
         /**
@@ -27,14 +55,15 @@ public class ArrayQueueDemo {
          * @param data
          * @return
          */
-        public boolean add(int data) {
+        public boolean add(T data) {
             // 队列满，添加失败
-            if (size() == capacity) {
-                throw new IndexOutOfBoundsException("Queue full");
+            if (isFull()) {
+                return false;
             }
-            // 因为是环形数组，所以要求模
-            tail = (tail + 1) % capacity;
+            // tail指向下一个待入队元素的存储位置，所以先赋值再让指针加1
             queue[tail] = data;
+            // 环形数组需要取模运算
+            tail = (tail + 1) % capacity;
             return true;
         }
 
@@ -43,12 +72,15 @@ public class ArrayQueueDemo {
          *
          * @return
          */
-        public int get() {
-            if (size() <= 0) {
-                throw new IndexOutOfBoundsException("Queue empty");
+        public T get() {
+            if (isEmpty()) {
+                return null;
             }
+            // head指向头元素位置，所以先取出再让指针加1
+            T data = queue[head];
+            // 环形数组需要取模运算
             head = (head + 1) % capacity;
-            return queue[head];
+            return data;
         }
 
         /**
@@ -57,11 +89,29 @@ public class ArrayQueueDemo {
          * @return
          */
         public int size() {
-            int size = tail - head + 1;
+            int size = tail - head;
             if (size < 0) {
                 size += capacity;
             }
             return size;
+        }
+
+        /**
+         * 队列是否为空：当tail与head指向同一位置时，表示队列为空
+         *
+         * @return
+         */
+        public boolean isEmpty() {
+            return tail == head;
+        }
+
+        /**
+         * 队列是否已满：因为预留了一个位置，所以tail需要加1；环形队列需要取模运算
+         *
+         * @return
+         */
+        public boolean isFull() {
+            return head == (tail + 1) % capacity;
         }
 
     }
