@@ -9,30 +9,33 @@ package com.github.gozhuyinglong.datastructures.queue;
 public class ArrayQueueDemo {
 
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue(5);
+        ArrayQueue<Integer> queue = new ArrayQueue<>(5);
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        queue.add(1);
-        queue.add(2);
-        queue.add(3);
-        queue.add(4);
-        queue.add(5);
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("入队：1 --> " + queue.add(1));
+        System.out.println("入队：2 --> " + queue.add(2));
+        System.out.println("入队：3 --> " + queue.add(3));
+        System.out.println("入队：4 --> " + queue.add(4));
+        System.out.println("入队：5 --> " + queue.add(5));
+
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        System.out.printf("取出元素: %s\n", queue.get());
-        queue.add(6);
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("入队：6 --> " + queue.add(6));
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        System.out.printf("取出元素: %s\n", queue.get());
-        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.println("入队：7 --> " + queue.add(7));
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("出队： --> " + queue.get());
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        queue.add(7);
-        queue.add(8);
+        System.out.println("入队：8 --> " + queue.add(8));
+        System.out.println("入队：9 --> " + queue.add(9));
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        System.out.printf("取出元素: %s\n", queue.get());
-        System.out.printf("取出元素: %s\n", queue.get());
-        System.out.printf("取出元素: %s\n", queue.get());
-        System.out.printf("取出元素: %s\n", queue.get());
-        System.out.printf("取出元素: %s\n", queue.get());
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("出队： --> " + queue.get());
+        System.out.println("出队： --> " + queue.get());
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
-        queue.add(9);
+        System.out.println("入队：10 --> " + queue.add(10));
         System.out.printf("头指针: %s\t尾指针: %s\t队列大小: %s\t容量: %s\n", queue.head, queue.tail, queue.size(), queue.capacity);
     }
 
