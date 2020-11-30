@@ -11,3 +11,4 @@
 3. 《 [链表（单链表、双链表、环形链表）](https://blog.csdn.net/gozhuyinglong/article/details/109967815) 》
 4. 《 [栈](https://blog.csdn.net/gozhuyinglong/article/details/110149473) 》
 5. 《 [队列](https://blog.csdn.net/gozhuyinglong/article/details/110365900) 》
+6. 《 [树](https://blog.csdn.net/gozhuyinglong/article/details/110394480) 》
