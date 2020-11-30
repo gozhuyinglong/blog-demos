@@ -99,9 +99,9 @@ public class TreeDemo {
     }
 
     private static class TreeNode {
-        private final Object element;
-        private TreeNode firstChild;
-        private TreeNode nextSibling;
+        private final Object element; // 当前节点数据
+        private TreeNode firstChild; // 当前节点的第一个子节点
+        private TreeNode nextSibling; // 当前节点的下一个兄弟节点
 
         public TreeNode(Object element) {
             this.element = element;
