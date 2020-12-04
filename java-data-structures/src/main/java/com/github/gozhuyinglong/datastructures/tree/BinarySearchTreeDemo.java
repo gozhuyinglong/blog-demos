@@ -42,6 +42,9 @@ public class BinarySearchTreeDemo {
         System.out.println("----------------------删除某个值");
         System.out.println("删除[10]\t" + tree.remove(10));
         System.out.println("删除[2] \t" + tree.remove(2));
+
+        System.out.println("----------------------顺序输出");
+        tree.orderPrint();
     }
 
     private static class BinarySearchTree {
@@ -214,7 +217,7 @@ public class BinarySearchTreeDemo {
         }
 
         /**
-         * 删除某元素
+         * 删除目标元素
          *
          * @param element
          * @return
@@ -223,6 +226,7 @@ public class BinarySearchTreeDemo {
             if (root == null) {
                 return false;
             }
+            // 如果删除的元素是root
             if (root.compareTo(element) == 0) {
                 if (root.right == null) {
                     root = root.left;
@@ -236,46 +240,56 @@ public class BinarySearchTreeDemo {
         }
 
         /**
-         * 删除某元素（递归）
+         * 删除目标元素（递归），有三种情况：
+         * （1）目标元素为叶子节点
+         * （2）目标元素即有左子树，也有右子树
+         * （3）目标元素只有左子树，或只有右子树
          *
-         * @param node
-         * @param element
+         * @param parentNode 当前节点的父节点
+         * @param node       当前节点（若当前节点上的元素与要删除的元素匹配，则删除当前节点）
+         * @param element    要删除的元素
          * @return
          */
         private boolean remove(Node parentNode, Node node, int element) {
             if (node == null) {
                 return false;
             }
-
+            // 先找到目标元素
             int compareResult = node.compareTo(element);
-            if (compareResult > 0) {
-                return remove(node, node.right, element);
-            }
             if (compareResult < 0) {
                 return remove(node, node.left, element);
             }
-            // 当前节点为root节点
-            if (parentNode == null) {
-                if (root.right == null) {
-                    root = root.left;
-                } else {
-                    root.right.left = root.left;
-                    root = root.right;
-                }
-                return true;
+            if (compareResult > 0) {
+                return remove(node, node.right, element);
             }
 
-            if (parentNode.right.compareTo(node.element) == 0) {
-                // 当前节点是父节点的右子树
+            // 找到目标元素，判断该节点是父节点的左子树还是右子树
+            boolean isParentLeft = false;
+            if (parentNode.left != null && parentNode.left.compareTo(element) == 0) {
+                isParentLeft = true;
+            }
+
+            // 删除目标元素
+            if (node.left == null && node.right == null) {
+                // （1）目标元素为叶子节点，直接删除
+                if (isParentLeft) {
+                    parentNode.left = null;
+                } else {
+                    parentNode.right = null;
+                }
+            } else if (node.left != null && node.right != null) {
+                // （2）目标元素即有左子树，也有右子树
+
 
             } else {
-                // 当前节点是父节点的左子树
+                // （3）目标元素只有左子树，或只有右子树
+                if (isParentLeft) {
+                    parentNode.left = node.left != null ? node.left : node.right;
+                } else {
+                    parentNode.right = node.left != null ? node.left : node.right;
+                }
             }
-
-
-
-            return false;
-
+            return true;
         }
     }
 
@@ -290,13 +304,7 @@ public class BinarySearchTreeDemo {
 
         @Override
         public int compareTo(Integer o) {
-            if (o < element) {
-                return -1;
-            } else if (o > element) {
-                return 1;
-            } else {
-                return 0;
-            }
+            return o.compareTo(element);
         }
 
         @Override
