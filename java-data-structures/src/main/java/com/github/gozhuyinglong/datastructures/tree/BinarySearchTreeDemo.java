@@ -11,40 +11,38 @@ public class BinarySearchTreeDemo {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
 
-
         System.out.println("----------------------添加元素");
-        System.out.println(tree.add(5));
-        System.out.println(tree.add(4));
-        System.out.println(tree.add(6));
-        System.out.println(tree.add(8));
-        System.out.println(tree.add(3));
-        System.out.println(tree.add(1));
-        System.out.println(tree.add(2));
-        System.out.println(tree.add(9));
-        System.out.println(tree.add(7));
+        Integer[] array = {5, 2, 7, 1, 4, 3, 7, 6, 9, 8};
+        for (Integer element : array) {
+            System.out.printf("添加元素[%s] --> %s\n", element, tree.add(element));
+        }
 
-        System.out.println("----------------------顺序输出");
+        System.out.println("----------------------顺序输出（中序遍历）");
         tree.orderPrint();
 
         System.out.println("----------------------查找元素");
         System.out.println(tree.find(7));
 
-        System.out.println("----------------------查找最小值");
+        System.out.println("----------------------查找最小元素");
         System.out.println(tree.findMin());
 
-        System.out.println("----------------------查找最大值");
+        System.out.println("----------------------查找最大元素");
         System.out.println(tree.findMax());
 
-        System.out.println("----------------------是否包含某值");
-        System.out.println("是否包含[10]\t" + tree.contains(10));
-        System.out.println("是否包含[2] \t" + tree.contains(2));
+        System.out.println("----------------------是否包含元素");
+        System.out.println("是否包含[0] --> \t" + tree.contains(0));
+        System.out.println("是否包含[2] --> \t" + tree.contains(2));
 
-        System.out.println("----------------------删除某个值");
-        System.out.println("删除[10]\t" + tree.remove(10));
-        System.out.println("删除[2] \t" + tree.remove(2));
-
-        System.out.println("----------------------顺序输出");
+        System.out.println("----------------------删除目标元素");
+        System.out.println("删除[0] --> \t" + tree.remove(0));
         tree.orderPrint();
+        System.out.println("删除[1] --> \t" + tree.remove(1));
+        tree.orderPrint();
+        System.out.println("删除[4] --> \t" + tree.remove(4));
+        tree.orderPrint();
+        System.out.println("删除[7] --> \t" + tree.remove(7));
+        tree.orderPrint();
+
     }
 
     private static class BinarySearchTree {
@@ -264,26 +262,33 @@ public class BinarySearchTreeDemo {
             }
 
             // 找到目标元素，判断该节点是父节点的左子树还是右子树
-            boolean isParentLeft = false;
+            boolean isLeftOfParent = false;
             if (parentNode.left != null && parentNode.left.compareTo(element) == 0) {
-                isParentLeft = true;
+                isLeftOfParent = true;
             }
 
             // 删除目标元素
-            if (node.left == null && node.right == null) {
-                // （1）目标元素为叶子节点，直接删除
-                if (isParentLeft) {
+            if (node.left == null && node.right == null) { // （1）目标元素为叶子节点，直接删除
+                if (isLeftOfParent) {
                     parentNode.left = null;
                 } else {
                     parentNode.right = null;
                 }
-            } else if (node.left != null && node.right != null) {
-                // （2）目标元素即有左子树，也有右子树
+            } else if (node.left != null && node.right != null) { // （2）目标元素即有左子树，也有右子树
+                // 找到右子树最小值（叶子节点），并将其删除
+                Node minNode = findMin(node.right);
+                remove(minNode.element);
+                // 将该最小值替换要删除的目标节点
+                minNode.left = node.left;
+                minNode.right = node.right;
+                if(isLeftOfParent) {
+                    parentNode.left = minNode;
+                } else {
+                    parentNode.right = minNode;
+                }
 
-
-            } else {
-                // （3）目标元素只有左子树，或只有右子树
-                if (isParentLeft) {
+            } else { // （3）目标元素只有左子树，或只有右子树
+                if (isLeftOfParent) {
                     parentNode.left = node.left != null ? node.left : node.right;
                 } else {
                     parentNode.right = node.left != null ? node.left : node.right;
