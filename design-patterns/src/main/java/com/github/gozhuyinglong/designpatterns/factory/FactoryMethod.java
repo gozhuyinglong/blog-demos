@@ -1,6 +1,8 @@
 package com.github.gozhuyinglong.designpatterns.factory;
 
 /**
+ * 工厂方法模式
+ *
  * @author ZhuYinglong
  * @date 2020/12/8 0008
  */
