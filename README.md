@@ -6,11 +6,11 @@
 ## 数据结构与算法系列
 
 ### Java数据结构与算法分析
-1. 《 [数组](https://blog.csdn.net/gozhuyinglong/article/details/109702860) 》
-2. 《 [稀疏数组](https://blog.csdn.net/gozhuyinglong/article/details/109723684) 》
-3. 《 [链表（单链表、双链表、环形链表）](https://blog.csdn.net/gozhuyinglong/article/details/109967815) 》
-4. 《 [栈](https://blog.csdn.net/gozhuyinglong/article/details/110149473) 》
-5. 《 [队列](https://blog.csdn.net/gozhuyinglong/article/details/110365900) 》
-6. 《 [树](https://blog.csdn.net/gozhuyinglong/article/details/110394480) 》
-7. 《 [二叉树](https://blog.csdn.net/gozhuyinglong/article/details/110418481) 》
-8. 《 [二叉查找树（BST）](https://blog.csdn.net/gozhuyinglong/article/details/110729019) 》
+* 《 [数组](https://mp.weixin.qq.com/s/YVbahU_0fzmyEX-JBvcnqQ) 》
+* 《 [稀疏数组](https://mp.weixin.qq.com/s/YYemaomm10HiKs9MoKHKIw) 》
+* 《 [链表（单链表、双链表、环形链表）](https://mp.weixin.qq.com/s/46ShChMslDGsV6xSObh5nQ) 》
+* 《 [栈](https://blog.csdn.net/gozhuyinglong/article/details/110149473) 》
+* 《 [队列](https://blog.csdn.net/gozhuyinglong/article/details/110365900) 》
+* 《 [树](https://blog.csdn.net/gozhuyinglong/article/details/110394480) 》
+* 《 [二叉树](https://blog.csdn.net/gozhuyinglong/article/details/110418481) 》
+* 《 [二叉查找树（BST）](https://blog.csdn.net/gozhuyinglong/article/details/110729019) 》
