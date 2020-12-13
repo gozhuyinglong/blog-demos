@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.datastructures.tree;
+package io.github.gozhuyinglong.datastructures.tree;
 
 /**
  * 树

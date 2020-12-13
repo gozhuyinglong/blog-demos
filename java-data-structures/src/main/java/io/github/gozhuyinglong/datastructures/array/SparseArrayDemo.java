@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.datastructures.array;
+package io.github.gozhuyinglong.datastructures.array;
 
 /**
  * 稀疏数组

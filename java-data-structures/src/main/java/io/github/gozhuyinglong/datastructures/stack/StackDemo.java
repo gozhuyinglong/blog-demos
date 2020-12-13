@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.datastructures.stack;
+package io.github.gozhuyinglong.datastructures.stack;
 
 /**
  * 栈

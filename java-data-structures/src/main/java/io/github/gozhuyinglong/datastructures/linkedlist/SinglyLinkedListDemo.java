@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.datastructures.linkedlist;
+package io.github.gozhuyinglong.datastructures.linkedlist;
 
 /**
  * 单链表

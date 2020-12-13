@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.datastructures.queue;
+package io.github.gozhuyinglong.datastructures.queue;
 
 /**
  * 队列 - 数组实现
