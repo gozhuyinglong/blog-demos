@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.designpatterns.singleton;
+package io.github.gozhuyinglong.designpatterns.singleton;
 
 import java.util.concurrent.TimeUnit;
 

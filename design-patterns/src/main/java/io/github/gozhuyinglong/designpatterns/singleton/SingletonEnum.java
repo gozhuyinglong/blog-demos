@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.designpatterns.singleton;
+package io.github.gozhuyinglong.designpatterns.singleton;
 
 /**
  * 单例模式 - 枚举类

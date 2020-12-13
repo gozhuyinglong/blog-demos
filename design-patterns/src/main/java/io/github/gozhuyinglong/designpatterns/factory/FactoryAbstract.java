@@ -1,4 +1,4 @@
-package com.github.gozhuyinglong.designpatterns.factory;
+package io.github.gozhuyinglong.designpatterns.factory;
 
 /**
  * 抽象工厂模式
