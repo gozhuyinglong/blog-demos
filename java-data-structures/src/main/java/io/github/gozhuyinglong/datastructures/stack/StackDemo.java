@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.stack;
 /**
  * 栈
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/25 0025
  */
 public class StackDemo {
