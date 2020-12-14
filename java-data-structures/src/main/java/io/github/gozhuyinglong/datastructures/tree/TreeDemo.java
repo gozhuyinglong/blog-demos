@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.tree;
 /**
  * 树
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/30 0030
  */
 public class TreeDemo {
