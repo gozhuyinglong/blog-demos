@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.queue;
 /**
  * 队列 - 数组实现
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/26 0026
  */
 public class ArrayQueueDemo {
