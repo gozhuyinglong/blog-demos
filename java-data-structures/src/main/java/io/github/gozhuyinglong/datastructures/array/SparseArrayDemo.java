@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.array;
 /**
  * 稀疏数组
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/16
  */
 public class SparseArrayDemo {
