@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.linkedlist;
 /**
  * 环形链表
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/22 0022
  */
 public class CircularLinkedListDemo {
