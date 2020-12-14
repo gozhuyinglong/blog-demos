@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.tree;
 /**
  * 二叉查找树（二叉排序树）
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/12/3 0003
  */
 public class BinarySearchTreeDemo {
