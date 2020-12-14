@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.datastructures.linkedlist;
 /**
  * 双链表
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/21 0021
  */
 public class DoublyLinkedListDemo {
