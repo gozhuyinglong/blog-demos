@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * 栈的应用 - 平衡符
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/11/25 0025
  */
 public class StackDemoBalancedChar {
