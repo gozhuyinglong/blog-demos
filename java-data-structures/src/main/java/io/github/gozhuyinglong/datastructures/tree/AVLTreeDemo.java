@@ -7,33 +7,31 @@ package io.github.gozhuyinglong.datastructures.tree;
  * @author ZhuYinglong
  * @date 2020/12/14 0014
  */
-public class AvlTreeDemo {
+public class AVLTreeDemo {
 
     public static void main(String[] args) {
         System.out.println("----------------------添加元素");
         int[] array = {3, 2, 1};
-        AvlTree tree = new AvlTree();
+        AVLTree tree = new AVLTree();
         for (int element : array) {
             System.out.printf("添加元素[%s] --> %s\n", element, tree.add(element));
         }
 
         System.out.println("----------------------顺序输出（中序遍历）");
         tree.orderPrint();
+
         System.out.println("----------------------当前树的高度");
-        System.out.println(tree.height());
+        System.out.println("当前树：" + tree.getRoot().height());
+        System.out.println("左子树：" + tree.getRoot().heightLeft());
+        System.out.println("右子树：" + tree.getRoot().heightRight());
 
     }
 
-    private static class AvlTree {
+    private static class AVLTree {
         private Node root; // 树根
 
-        /**
-         * 获取当前树的高度
-         *
-         * @return
-         */
-        public int height() {
-            return root.height();
+        public Node getRoot() {
+            return root;
         }
 
         /**
@@ -296,29 +294,17 @@ public class AvlTreeDemo {
         }
 
         /**
-         * 获取节点的高度，如果是空则高度为0
-         *
-         * @param node
-         * @return
-         */
-//        private int height(Node node) {
-//            return node == null ? 0 : node.height;
-//        }
-
-        /**
          * 左旋转
          *
          * @param k1 原树根
          * @return 新树根
          */
-//        private Node leftRotate(Node k1) {
-//            Node k2 = k1.right;
-//            k1.right = k2.left;
-//            k2.left = k1;
-//            k1.height = Math.max(height(k1.left), height(k1.right)) + 1;
-//            k2.height = Math.max(k1.height, height(k2.right)) + 1;
-//            return k2;
-//        }
+        private Node leftRotate(Node k1) {
+            Node k2 = k1.right;
+            k1.right = k2.left;
+            k2.left = k1;
+            return k2;
+        }
 
         /**
          * 右旋转
@@ -326,18 +312,16 @@ public class AvlTreeDemo {
          * @param k2 原树根
          * @return 新树根
          */
-//        private Node rightRotate(Node k2) {
-//            Node k1 = k2.left;
-//            k2.left = k1.right;
-//            k1.right = k2;
-//            k2.height = Math.max(height(k2.left), height(k2.right)) + 1;
-//            k1.height = Math.max(height(k1.left), k2.height) + 1;
-//            return k1;
-//        }
+        private Node rightRotate(Node k2) {
+            Node k1 = k2.left;
+            k2.left = k1.right;
+            k1.right = k2;
+            return k1;
+        }
     }
 
     private static class Node implements Comparable<Integer> {
-        private final int element; // 数据元素
+        private int element; // 数据元素
         private Node left; // 左子节点
         private Node right; // 右子节点
 
@@ -352,6 +336,52 @@ public class AvlTreeDemo {
          */
         public int height() {
             return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
+        }
+
+        /**
+         * 当前节点的左子树高度
+         *
+         * @return
+         */
+        public int heightLeft() {
+            if (left == null) {
+                return 0;
+            }
+            return left.height();
+        }
+
+        /**
+         * 当前节点的右子树高度
+         *
+         * @return
+         */
+        public int heightRight() {
+            if (right == null) {
+                return 0;
+            }
+            return right.height();
+        }
+
+        /**
+         * 左旋转（向左旋转）
+         * <p>
+         * 以当前节点为树根，当（右子树的高度 - 左子树的高度） > 1时，进行左旋转：
+         * （1）将当前（根）节点向左下移，成为新的左子节点；并将右子节点设为原根节点右子树的左子树
+         * （2）将当前节点的右节点上移，成新的树根（当前节点）；并将左子节点设为新的左子节点（原树根）
+         */
+        public void leftRotate() {
+            // 将当前节点向左下移，成为新的左节点
+            Node newLeftNode = new Node(element);
+            newLeftNode.left = left;
+            // 将右子节点设为原根节点右子树的左子树
+            newLeftNode.right = right.left;
+
+            // 将右节点上移，成为新的树根（当前节点）
+            element = right.element;
+            right = right.right;
+            // 将左子节点设为新的左子节点（原树根）
+            left = newLeftNode;
+
         }
 
         @Override
