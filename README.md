@@ -12,5 +12,5 @@
 * 《 [栈](https://mp.weixin.qq.com/s/dfv4WM_-agLpygCuzqQUTA) 》
 * 《 [队列](https://mp.weixin.qq.com/s/64oTQJatNcBsfvrJKMQOWA) 》
 * 《 [树](https://mp.weixin.qq.com/s/Ui5p4RQRwEHv4a_HWeXJYQ) 》
-* 《 [二叉树](https://blog.csdn.net/gozhuyinglong/article/details/110418481) 》
-* 《 [二叉查找树（BST）](https://blog.csdn.net/gozhuyinglong/article/details/110729019) 》
+* 《 [二叉树](https://mp.weixin.qq.com/s/XkeEyUCCvQ_AtMLBUYTH0Q) 》
+* 《 [二叉查找树（BST）](https://mp.weixin.qq.com/s/6S8M6r-EY4IMF3UUvZ7_AA) 》
