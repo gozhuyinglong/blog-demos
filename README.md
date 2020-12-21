@@ -1,5 +1,5 @@
 ## 关于本代码仓库
-1. CSDN博客地址：[https://blog.csdn.net/gozhuyinglong](https://blog.csdn.net/gozhuyinglong)
+1. 主页地址：[https://gozhuyinglong.github.io](https://gozhuyinglong.github.io)
 2. 这个代码仓库里是博客中涉及的源码、文件等
 3. 如果对您有帮助，请给个Star，谢谢您！
 
@@ -13,6 +13,7 @@
 * 《 [树](https://mp.weixin.qq.com/s/Ui5p4RQRwEHv4a_HWeXJYQ) 》
 * 《 [二叉树](https://mp.weixin.qq.com/s/XkeEyUCCvQ_AtMLBUYTH0Q) 》
 * 《 [二叉查找树（BST）](https://mp.weixin.qq.com/s/6S8M6r-EY4IMF3UUvZ7_AA) 》
+* 《 [AVL树（平衡二叉树）](https://mp.weixin.qq.com/s/eeXi_11illdVqMnkse_mhQ) 》
 
 ## 码农工具箱
 
