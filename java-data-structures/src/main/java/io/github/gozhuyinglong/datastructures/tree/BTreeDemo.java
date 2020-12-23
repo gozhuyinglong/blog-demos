@@ -1,5 +1,7 @@
 package io.github.gozhuyinglong.datastructures.tree;
 
+import java.util.Map;
+
 /**
  * B树
  *
@@ -8,108 +10,204 @@ package io.github.gozhuyinglong.datastructures.tree;
  */
 public class BTreeDemo {
 
+
     public static void main(String[] args) {
-
-        Node node = new Node(0, "000");
-
-        Node node1 = new Node(1, "a");
-        Node node2 = new Node(3, "c");
-        Node node3 = new Node(5, "e");
-        Node node4 = new Node(2, "b");
-        Node node5 = new Node(4, "d");
-        node.addChild(node1);
-        node.addChild(node2);
-        node.addChild(node3);
-        node.addChild(node4);
-        node.addChild(node5);
-
-
-        for (int i = 0; i < node.childNode.length; i++) {
-            System.out.println(node.childNode[i]);
-        }
 
 
     }
 
     private static class BTree {
 
+        private Node root;
 
-        public void add(int key, String value) {
-            Node node = new Node(key, value);
-        }
-
-    }
-
-    private static class Node implements Comparable<Node> {
-
-        private static final int childCapacity = 5; // 子节点容量
-
-        private final int key; // 节点的键
-        private final String value; // 节点的值
-        private Node[] childNode = new Node[childCapacity]; // 子节点，使用数组存储子节点
-
-        /**
-         * @param key   节点的键
-         * @param value 节点的值
-         */
-        public Node(int key, String value) {
-            this.key = key;
-            this.value = value;
+        public Node getRoot() {
+            return root;
         }
 
         /**
-         * 添加一个子节点，并保证其顺序
+         * 添加一个键
          *
+         * @param entry
+         */
+        public void add(Entry<Integer, String> entry) {
+            if (entry == null) {
+                return;
+            }
+
+            if (root == null) {
+                Node node = new Node();
+                node.add(entry);
+                return;
+            }
+            add(entry, root);
+        }
+
+        /**
+         * 添加一个键，递归插入
+         *
+         * @param entry
          * @param node
          */
-        public void addChild(Node node) {
-            Node[] temp = new Node[childCapacity];
-            int i = 0;
-            for (; i < childNode.length; i++) {
-                if (childNode[i] == null) {
-                    temp[i] = node;
+        private void add(Entry<Integer, String> entry, Node node) {
+
+            // 当前节点为叶子节点，开始插入
+            if (node.getChildSize() == 0) {
+
+                return;
+            }
+
+            // 当前节点为内部节点，继续往下调用（新插入的节点，只能是叶子节点）
+            for (int i = 0; i < node.entrys.length; i++) {
+                if (node.entrys[i] == null || node.entrys[i].key > entry.key) {
+                    add(entry, node.getChildNode()[i]);
                     break;
                 }
 
-                if (childNode[i].compareTo(node) > 0) {
-                    temp[i] = node;
-                    break;
+                if(node.entrys.length == i + 1) {
+                    add(entry, node.getChildNode()[i + 1]);
                 }
-                temp[i] = childNode[i];
             }
-            System.arraycopy(childNode, i, temp, i + 1, childCapacity - i - 1);
-            childNode = temp;
+
+        }
+    }
+
+    private static class Node {
+
+        private static final int M = 3; // B树的阶
+
+        private final Entry<Integer, String>[] entrys; // 当前节点的键值对
+        private Node parentNode; // 父节点
+        private Node[] childNode; // 子节点，使用数组存储子节点
+
+        public Node getParentNode() {
+            return parentNode;
+        }
+
+        public void setParentNode(Node parentNode) {
+            this.parentNode = parentNode;
+        }
+
+        public Node[] getChildNode() {
+            return childNode;
+        }
+
+        public Node() {
+            entrys = new Entry[M - 1];
+            childNode = new Node[M];
         }
 
         /**
-         * 获取子节点大小
+         * 获取当前节点键的大小
+         *
+         * @return
+         */
+        public int getSize() {
+            int i = 0;
+            for (; i < entrys.length; i++) {
+                if (entrys[i] == null) {
+                    break;
+                }
+            }
+            return i;
+        }
+
+        /**
+         * 添加一个键，并保持顺序
+         *
+         * @param entry
+         */
+        public void add(Entry<Integer, String> entry) {
+            if (entry == null) {
+                return;
+            }
+            for (int i = 0; i < entrys.length; i++) {
+                // 添加到数组尾部
+                if (entrys[i] == null) {
+                    entrys[i] = entry;
+                    break;
+                }
+                // 添加到数组中间
+                if (entrys[i].key > entry.key) {
+                    System.arraycopy(entrys, i, entrys, i + 1, M - i - 1);
+                    entrys[i] = entry;
+                    break;
+                }
+            }
+        }
+
+        /**
+         * 获取子节点数量
          *
          * @return
          */
         public int getChildSize() {
-            for (int i = 0; i < childNode.length; i++) {
+            int i = 0;
+            for (; i < childNode.length; i++) {
                 if (childNode[i] == null) {
-                    return i;
-                }
-
-                if (i == childNode.length - 1) {
-                    return childNode.length;
+                    break;
                 }
             }
-            return 0;
+            return i;
+        }
+
+        /**
+         * 添加一个子节点，并保持顺序
+         *
+         * @param node
+         */
+        public void addChild(Node node) {
+            if (node == null) {
+                return;
+            }
+            for (int i = 0; i < entrys.length; i++) {
+                // 添加到数组尾部
+                if (childNode[i] == null) {
+                    childNode[i] = node;
+                    break;
+                }
+                // 添加到数组中间
+                if (childNode[i].entrys[0].key > node.entrys[0].key) {
+                    System.arraycopy(childNode, i, childNode, i + 1, M - i - 1);
+                    childNode[i] = node;
+                    break;
+                }
+            }
+        }
+
+
+    }
+
+    /**
+     * 定位一个键值对，其实现了 Map.Entry<K, V> 接口
+     *
+     * @param <K>
+     * @param <V>
+     */
+    private static class Entry<K, V> implements Map.Entry<K, V> {
+
+        final K key;
+        V value;
+
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
         }
 
         @Override
-        public int compareTo(Node o) {
-            return Integer.compare(key, o.key);
+        public K getKey() {
+            return key;
         }
 
         @Override
-        public String toString() {
-            return "Node{" +
-                    "key=" + key +
-                    ", value='" + value + '\'' +
-                    '}';
+        public V getValue() {
+            return value;
+        }
+
+        @Override
+        public V setValue(V newValue) {
+            V oldValue = this.value;
+            this.value = newValue;
+            return oldValue;
         }
     }
 }
