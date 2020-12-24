@@ -53,6 +53,15 @@ public class BTreeDemo {
             // 当前节点为叶子节点，开始插入
             if (node.getChildSize() == 0) {
 
+                // 当前节点已满，分裂该节点
+                if (node.entrys.length == node.getSize()) {
+                    // 未达到最大分支，则直接分裂
+                    // 若已达到最大分支，则...
+                    return;
+                }
+
+                // 当前节点未满，则直接插入
+                node.add(entry);
                 return;
             }
 
@@ -63,17 +72,35 @@ public class BTreeDemo {
                     break;
                 }
 
-                if(node.entrys.length == i + 1) {
+                if (node.entrys.length == i + 1) {
                     add(entry, node.getChildNode()[i + 1]);
                 }
             }
 
         }
+
+        /**
+         * 使用顺序查找法，找到应该插入的位置
+         *
+         * @param entrys
+         * @param target
+         * @return
+         */
+        private int sequenceSearchIndex(Entry<Integer, String>[] entrys, Entry<Integer, String> target) {
+            int i = 0;
+            for (; i < entrys.length; i++) {
+                // 添加到数组尾部
+                if (entrys[i] == null || entrys[i].key > target.key) {
+                    break;
+                }
+            }
+            return i;
+        }
     }
 
     private static class Node {
 
-        private static final int M = 3; // B树的阶
+        public static final int M = 3; // B树的阶
 
         private final Entry<Integer, String>[] entrys; // 当前节点的键值对
         private Node parentNode; // 父节点
