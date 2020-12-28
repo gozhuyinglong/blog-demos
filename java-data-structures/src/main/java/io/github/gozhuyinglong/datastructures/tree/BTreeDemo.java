@@ -15,7 +15,7 @@ public class BTreeDemo {
     public static void main(String[] args) {
 
         int[] item = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
-        BTree tree = new BTree();
+        BTree tree = new BTree(5);
         for (int i : item) {
             tree.add(new Entry(i, "-->" + i));
         }
@@ -28,8 +28,14 @@ public class BTreeDemo {
      */
     private static class BTree {
 
-        private static final int M = 5; // B树的阶
+        private final int m; // B树的阶
+        private final int min;// 元素最小值
         private Node root; // 树根
+
+        public BTree(int m) {
+            this.m = m;
+            this.min = (int) Math.ceil(m / 2.0) - 1;
+        }
 
         public Node getRoot() {
             return root;
@@ -69,6 +75,39 @@ public class BTreeDemo {
         }
 
         /**
+         * 根据键搜索记录所在节点
+         *
+         * @param key
+         * @return
+         */
+        public Node searchNode(int key) {
+            return searchNode(root, key);
+        }
+
+        /**
+         * 根据键搜索记录所在节点 - 递归
+         *
+         * @param node
+         * @param key
+         * @return
+         */
+        private Node searchNode(Node node, int key) {
+            if (node == null) {
+                return null;
+            }
+            // 使用二分查找法定位下标
+            int index = Collections.binarySearch(node.getEntrys(), new Entry(key, null));
+            if (index >= 0) {
+                return node;
+            } else {
+                if (node.getChildNode().size() == 0) {
+                    return null;
+                }
+                return searchNode(node.getChildNode().get(-index - 1), key);
+            }
+        }
+
+        /**
          * 添加元素
          *
          * @param entry
@@ -96,7 +135,7 @@ public class BTreeDemo {
             if (node.getChildNode().size() == 0) {
 
                 // 如果当前节点元素未满，直接添加元素
-                if (node.getEntrys().size() < M - 1) {
+                if (node.getEntrys().size() < m - 1) {
                     node.add(entry);
                     return;
                 }
@@ -159,7 +198,7 @@ public class BTreeDemo {
                 node.parentNode.addChild(leftNode).addChild(rightNode);
                 node.parentNode.getChildNode().remove(node);
                 // 若其父节点溢出，继续分裂
-                if (node.parentNode.getEntrys().size() > M - 1) {
+                if (node.parentNode.getEntrys().size() > m - 1) {
                     split(node.parentNode);
                 }
             }
@@ -171,19 +210,37 @@ public class BTreeDemo {
          * @param key
          */
         public void remove(int key) {
-            remove(root, key);
+            Node node = searchNode(key);
+            if (node == null) {
+                return;
+            }
+
+            if (node.childNode.size() > 0) {
+                // 删除的是内部节点
+
+            } else {
+                // 删除的是叶子节点
+                int index = Collections.binarySearch(node.getEntrys(), new Entry(key, null));
+                node.getEntrys().remove(index);
+                if (node.parentNode == null) {
+                    return;
+                }
+
+                // 键数小于最小值，向兄弟节点借
+                if (node.getEntrys().size() < min) {
+                    Node parentNode = node.parentNode;
+                    int i = parentNode.getChildNode().indexOf(parentNode);
+                    if (i == 0) {
+                        if(parentNode.getChildNode().get(1).getEntrys().size() == min) {
+                            // 如果不够借，则合并
+                        } else {
+                            // 够借则选装
+                        }
+                    }
+                }
+            }
+
         }
-
-        /**
-         * 删除元素 - 递归
-         *
-         * @param node
-         * @param key
-         */
-        private void remove(Node node, int key) {
-
-        }
-
     }
 
     /**
