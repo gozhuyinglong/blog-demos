@@ -15,6 +15,10 @@
 * 《 [二叉查找树（BST）](https://mp.weixin.qq.com/s/6S8M6r-EY4IMF3UUvZ7_AA) 》
 * 《 [AVL树（平衡二叉树）](https://mp.weixin.qq.com/s/eeXi_11illdVqMnkse_mhQ) 》
 
+## 设计模式
+
+* 《 [单例模式](https://mp.weixin.qq.com/s/bb2LhnCDUZfprHwLtAK18Q) 》
+
 ## 码农工具箱
 
 * 《 [教你使用GitHub搭建个人网站](https://mp.weixin.qq.com/s/fFP3sk8gaeG10dfZdPj4bQ) 》
