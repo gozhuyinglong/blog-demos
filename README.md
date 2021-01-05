@@ -23,3 +23,4 @@
 ## 码农工具箱
 
 * 《 [教你使用GitHub搭建个人网站](https://mp.weixin.qq.com/s/fFP3sk8gaeG10dfZdPj4bQ) 》
+* 《 [80行Python代码搞定全国区划代码](https://mp.weixin.qq.com/s/RrryeSKCAwD61NHfjaFOrA) 》
