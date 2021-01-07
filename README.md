@@ -28,6 +28,3 @@
 * 《 [80行Python代码搞定全国区划代码](https://mp.weixin.qq.com/s/RrryeSKCAwD61NHfjaFOrA) 》
 
 
-
-
-![](https://raw.githubusercontent.com/gozhuyinglong/gozhuyinglong.github.io/main/bottom.png)
