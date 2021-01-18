@@ -17,6 +17,7 @@
 * 《 [二叉查找树（BST）](https://mp.weixin.qq.com/s/6S8M6r-EY4IMF3UUvZ7_AA) 》
 * 《 [AVL树（平衡二叉树）](https://mp.weixin.qq.com/s/eeXi_11illdVqMnkse_mhQ) 》
 * 《 [B树](https://mp.weixin.qq.com/s/Cx03l-ezvYjAKrmedup-aQ) 》
+* 《 [散列表（哈希表）](https://mp.weixin.qq.com/s/oX28uyCbbaYQErT6RE-txg) 》
 
 ## 设计模式
 
