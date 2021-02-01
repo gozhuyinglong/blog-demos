@@ -22,6 +22,7 @@
 ## 设计模式
 
 * 《 [单例模式](https://mp.weixin.qq.com/s/bb2LhnCDUZfprHwLtAK18Q) 》
+* 《 [策略模式](https://mp.weixin.qq.com/s/FfhMIrD72vBWTGJe5yJzxw) 》
 
 ## 码农工具箱
 
