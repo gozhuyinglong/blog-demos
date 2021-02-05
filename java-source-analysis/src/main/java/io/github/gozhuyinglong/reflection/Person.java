@@ -4,6 +4,7 @@ package io.github.gozhuyinglong.reflection;
  * @author ZhuYinglong
  * @date 2021/2/2 0002
  */
+@PersonAnnotation
 public class Person {
 
     private String name;
@@ -16,11 +17,13 @@ public class Person {
         this.name = name;
     }
 
+    @PersonAnnotation
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
+    @PersonAnnotation
     public String getName() {
         return name;
     }
