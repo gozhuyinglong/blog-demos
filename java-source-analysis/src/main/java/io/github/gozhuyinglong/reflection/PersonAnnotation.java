@@ -7,10 +7,10 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/2/2 0002
  */
 @Retention(RUNTIME)
-@Target({TYPE, CONSTRUCTOR, METHOD})
+@Target({TYPE, CONSTRUCTOR, METHOD, FIELD})
 public @interface PersonAnnotation {
 }

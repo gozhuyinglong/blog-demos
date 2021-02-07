@@ -2,18 +2,20 @@ package io.github.gozhuyinglong.reflection;
 
 import org.junit.Test;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/2/2 0002
  */
 public class ReflectionTest {
 
     /**
      * 获取 Class 类实例的四种方式
-     *
-     * @throws Exception
      */
     @Test
     public void testClassFor() {
@@ -109,30 +111,85 @@ public class ReflectionTest {
     public void testConstructor() throws Exception {
         Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
 
-        // 获取一个 public 构造函数实例
-        Constructor<?> constructor1 = clazz.getConstructor(String.class, int.class);
+        // 获取一个声明为 public 构造函数实例
+        Constructor<?> constructor1 = clazz.getConstructor(String.class, int.class, PersonEnum.class);
         System.out.println("01 - " + constructor1);
 
-        // 获取所有 public 构造函数实例
+        // 获取所有声明为 public 构造函数实例
         Constructor<?>[] constructorArray1 = clazz.getConstructors();
-        System.out.println("02 - " + constructorArray1.length);
+        for (Constructor<?> constructor : constructorArray1) {
+            System.out.println("02 - " + constructor);
+        }
 
-        // 获取一个构造函数实例
+        // 获取一个声明的构造函数实例
         Constructor<?> constructor2 = clazz.getDeclaredConstructor(String.class);
         System.out.println("03 - " + constructor2);
 
-        // 获取所有构造函数实例
+        // 获取所有声明的构造函数实例
         Constructor<?>[] constructorArray2 = clazz.getDeclaredConstructors();
-        System.out.println("04 - " + constructorArray2.length);
+        for (Constructor<?> constructor : constructorArray2) {
+            System.out.println("04 - " + constructor);
+        }
 
-        // 根据构造函数实例创建一个实例
-        Object o1 = constructor1.newInstance("杨过", 25);
+        // 根据构造函数创建一个实例
+        Object o1 = constructor1.newInstance("杨过", 25, PersonEnum.MAN);
         System.out.println("05 - " + o1);
 
-        // 将构造函数的可访问标志设为 true 后，可以为私有构造函数创建实例
+        // 将构造函数的可访问标志设为 true 后，可以通过私有构造函数创建实例
         constructor2.setAccessible(true);
         Object o2 = constructor2.newInstance("小龙女");
         System.out.println("06 - " + o2);
+
+        // 获取该构造函数上的所有注解
+        Annotation[] annotations = constructor1.getDeclaredAnnotations();
+        for (Annotation annotation : annotations) {
+            System.out.println("07 - " + annotation);
+        }
+
+        // 获取该构造函数上的所有参数类型
+        Type[] genericParameterTypes = constructor1.getGenericParameterTypes();
+        for (Type genericParameterType : genericParameterTypes) {
+            System.out.println("08 - " + genericParameterType);
+        }
+
+    }
+
+    /**
+     * 属性
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testField() throws Exception {
+
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 获取一个该类或父类中声明为 public 的属性
+        Field field1 = clazz.getField("hobby");
+        System.out.println("01 - " + field1);
+
+        // 获取该类及父类中所有声明为 public 的属性
+        Field[] fieldArray1 = clazz.getFields();
+        for (Field field : fieldArray1) {
+            System.out.println("02 - " + field);
+        }
+
+        // 获取一个该类中声明的属性
+        Field field2 = clazz.getDeclaredField("name");
+        System.out.println("03 - " + field2);
+
+        // 获取该类中所有声明的属性
+        Field[] fieldArray2 = clazz.getDeclaredFields();
+        for (Field field : fieldArray2) {
+            System.out.println("04 - " + field);
+        }
+
+        // 获取该属性上的所有注解
+        Annotation[] declaredAnnotations = field2.getDeclaredAnnotations();
+        for (Annotation declaredAnnotation : declaredAnnotations) {
+            System.out.println("05 - " + declaredAnnotation);
+        }
+
 
     }
 }
