@@ -3,10 +3,7 @@ package io.github.gozhuyinglong.reflection;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 
 /**
  * @author 码农StayUp
@@ -103,6 +100,49 @@ public class ReflectionTest {
     }
 
     /**
+     * 类
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testClass() throws Exception {
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 获取该类所在包路径
+        Package aPackage = clazz.getPackage();
+        System.out.println("01 - " + aPackage);
+
+        // 获取该类上所有注解
+        Annotation[] declaredAnnotations = clazz.getDeclaredAnnotations();
+        for (Annotation temp : declaredAnnotations) {
+            System.out.println("02 - " + temp);
+        }
+
+        // 获取类上的修饰符
+        int modifiers = clazz.getModifiers();
+        String modifier = Modifier.toString(modifiers);
+        System.out.println("03 - " + modifier);
+
+        // 获取类名称
+        String name = clazz.getName();
+        System.out.println("04 - " + name);
+        // 获取简单类名
+        String simpleName = clazz.getSimpleName();
+        System.out.println("05 - " + simpleName);
+
+        // 获取直属超类
+        Type genericSuperclass = clazz.getGenericSuperclass();
+        System.out.println("06 - " + genericSuperclass);
+
+        // 获取直属实现的接口
+        Type[] genericInterfaces = clazz.getGenericInterfaces();
+        for (Type temp : genericInterfaces) {
+            System.out.println("07 - " + temp);
+        }
+
+    }
+
+    /**
      * 构造函数
      *
      * @throws Exception
@@ -190,6 +230,122 @@ public class ReflectionTest {
             System.out.println("05 - " + declaredAnnotation);
         }
 
+        // 获取修饰符
+        String modifier = Modifier.toString(field2.getModifiers());
+        System.out.println("06 - " + modifier);
+
+        // 获取属性类型，返回类对象
+        Class<?> type = field2.getType();
+        System.out.println("07 - " + type);
+        // 获取属性类型，返回Type对象
+        Type genericType = field2.getGenericType();
+        System.out.println("08 - " + genericType);
+
+        // 获取属性名称
+        String name = field2.getName();
+        System.out.println("09 - " + name);
 
     }
+
+
+    /**
+     * 方法
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testMethod() throws Exception {
+
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 获取一个该类及父类中声明为 public 的方法，需要指定方法的入参类型
+        Method method = clazz.getMethod("setName", String.class);
+        System.out.println("01 - " + method);
+
+        // 获取该类及父类中所有声明为 public 的方法
+        Method[] methods = clazz.getMethods();
+        for (Method temp : methods) {
+            System.out.println("02 - " + temp);
+        }
+
+        // 获取一个在该类中声明的方法
+        Method declaredMethod = clazz.getDeclaredMethod("display");
+        System.out.println("03 - " + declaredMethod);
+
+        // 获取所有在该类中声明的方法
+        Method[] declaredMethods = clazz.getDeclaredMethods();
+        for (Method temp : declaredMethods) {
+            System.out.println("04 - " + temp);
+        }
+
+        // 获取该方法上的所有注解
+        Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
+        for (Annotation temp : declaredAnnotations) {
+            System.out.println("05 - " + temp);
+        }
+
+        // 获取修饰符
+        String modifier = Modifier.toString(method.getModifiers());
+        System.out.println("06 - " + modifier);
+
+        // 获取返回值类型，返回类对象
+        Class<?> returnType = method.getReturnType();
+        System.out.println("07 - " + returnType);
+        // 获取返回值类型，返回Type对象
+        Type genericReturnType = method.getGenericReturnType();
+        System.out.println("08 - " + genericReturnType);
+
+        // 获取方法名称
+        String name = method.getName();
+        System.out.println("09 - " + name);
+
+        // 获取所有入参
+        Parameter[] parameters = method.getParameters();
+        for (Parameter temp : parameters) {
+            System.out.println("10 - " + temp);
+        }
+
+    }
+
+    /**
+     * 访问修饰符，以下简称：修饰符
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testModifier() throws Exception {
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 获取类的修饰符值
+        int modifiers1 = clazz.getModifiers();
+        System.out.println("01 - " + modifiers1);
+
+        // 获取属性的修饰符值
+        int modifiers2 = clazz.getDeclaredField("name").getModifiers();
+        System.out.println("02 - " + modifiers2);
+
+        // 获取构造函数的修饰符值
+        int modifiers3 = clazz.getDeclaredConstructor(String.class).getModifiers();
+        System.out.println("03 - " + modifiers3);
+
+        // 获取方法的修饰符值
+        int modifiers4 = clazz.getDeclaredMethod("display").getModifiers();
+        System.out.println("04 - " + modifiers4);
+
+        // 判断修饰符值是否 final 类型
+        boolean isFinal = Modifier.isFinal(modifiers1);
+        System.out.println("05 - " + isFinal);
+
+        // 判断修饰符值是否 public 类型
+        boolean isPublic = Modifier.isPublic(modifiers2);
+        System.out.println("06 - " + isPublic);
+
+        // 根据修饰符值，获取修饰符标志的字符串
+        String modifier = Modifier.toString(modifiers1);
+        System.out.println("07 - " + modifier);
+        System.out.println("08 - " + Modifier.toString(modifiers2));
+
+    }
+
+
 }

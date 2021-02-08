@@ -5,7 +5,7 @@ package io.github.gozhuyinglong.reflection;
  * @date 2021/2/2 0002
  */
 @PersonAnnotation
-public class Person extends PersonParent implements PersonInterface {
+public final class Person extends PersonParent implements PersonInterface {
 
     @PersonAnnotation
     private String name; // 姓名
@@ -32,11 +32,11 @@ public class Person extends PersonParent implements PersonInterface {
     }
 
 
-    @PersonAnnotation
     public String getName() {
         return name;
     }
 
+    @PersonAnnotation
     public void setName(String name) {
         this.name = name;
     }
@@ -47,6 +47,10 @@ public class Person extends PersonParent implements PersonInterface {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    private String display() {
+        return "我叫" + name + "，今年" + age + "岁了！";
     }
 
 
