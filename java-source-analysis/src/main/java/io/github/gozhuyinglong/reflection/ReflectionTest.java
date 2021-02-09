@@ -347,5 +347,47 @@ public class ReflectionTest {
 
     }
 
+    /**
+     * 参数
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testParameter() throws Exception {
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 获取构造函数的参数
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class, PersonEnum.class);
+        Parameter[] parameterArray1 = constructor.getParameters();
+        for (Parameter temp : parameterArray1) {
+            System.out.println("01 - " + temp);
+        }
+
+        // 获取方法的参数
+        Method method = clazz.getMethod("setName", String.class);
+        Parameter[] parameterArray2 = method.getParameters();
+        for (Parameter temp : parameterArray2) {
+            System.out.println("02 - " + temp);
+        }
+
+        Parameter parameter = parameterArray1[0];
+        // 获取参数上的注解
+        Annotation[] annotationArray = parameter.getAnnotations();
+        for (Annotation temp : annotationArray) {
+            System.out.println("02 - " + temp);
+        }
+
+        // 获取参数名称
+        String name = parameter.getName();
+        System.out.println("03 - " + name);
+
+        // 获取参数类型
+        Type parameterizedType = parameter.getParameterizedType();
+        System.out.println("04 - " + parameterizedType);
+        Class<?> type = parameter.getType();
+        System.out.println("05 - " + type);
+
+    }
+
 
 }

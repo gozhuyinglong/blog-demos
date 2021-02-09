@@ -11,6 +11,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @date 2021/2/2 0002
  */
 @Retention(RUNTIME)
-@Target({TYPE, CONSTRUCTOR, METHOD, FIELD})
+@Target({TYPE, CONSTRUCTOR, METHOD, FIELD, PARAMETER})
 public @interface PersonAnnotation {
 }

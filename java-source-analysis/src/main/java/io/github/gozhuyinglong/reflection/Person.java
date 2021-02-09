@@ -25,7 +25,7 @@ public final class Person extends PersonParent implements PersonInterface {
     }
 
     @PersonAnnotation
-    public Person(String name, int age, PersonEnum sex) {
+    public Person(@PersonAnnotation String name, int age, PersonEnum sex) {
         this.name = name;
         this.age = age;
         this.sex = sex;
