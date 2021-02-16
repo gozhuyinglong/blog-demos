@@ -389,5 +389,36 @@ public class ReflectionTest {
 
     }
 
+    /**
+     * 创建对象并执行方法
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testInvoke() throws Exception {
+        Class<?> clazz = Class.forName("io.github.gozhuyinglong.reflection.Person");
+
+        // 通过Class类的newInstance创建一个实例。（该方法调用无参构造器）
+        Object o1 = clazz.newInstance();
+        System.out.println("01 - " + o1.toString());
+
+        // 通过构造函数Constructor类创建一个实例
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class, PersonEnum.class);
+        Object o2 = constructor.newInstance("杨过", 25, PersonEnum.MAN);
+        System.out.println("02 - " + o2.toString());
+
+        // 先获取方法，再通过 invoke 方法来调用，第一个参数为实例，后面参数为方法的Parameter
+        Method method = clazz.getMethod("setName", String.class);
+        method.invoke(o1, "小龙女");
+        System.out.println("03 - " + o1.toString());
+
+        // 获取字段，因为 age 字段是私有的，所以将其设置为可访问（不设置会报异常）。并通过 set 方法来赋值
+        Field field = clazz.getDeclaredField("age");
+        field.setAccessible(true);
+        field.set(o1, 28);
+        System.out.println("04 - " + o1.toString());
+
+    }
+
 
 }
