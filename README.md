@@ -27,6 +27,7 @@
 ## 码农工具箱
 
 * 《 [教你使用GitHub搭建个人网站](https://mp.weixin.qq.com/s/fFP3sk8gaeG10dfZdPj4bQ) 》
+* 《 [如何将代码同时提交到Github和码云Gitee上](https://mp.weixin.qq.com/s/7xvtYbW_U73QbAVW_4wCSw) 》
 * 《 [80行Python代码搞定全国区划代码](https://mp.weixin.qq.com/s/RrryeSKCAwD61NHfjaFOrA) 》
 
 ## Java源码解析
