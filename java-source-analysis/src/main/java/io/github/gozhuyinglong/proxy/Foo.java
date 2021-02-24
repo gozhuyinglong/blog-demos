@@ -6,6 +6,6 @@ package io.github.gozhuyinglong.proxy;
  */
 public interface Foo {
 
-    String sayHello(String name);
+    String ping();
 
 }

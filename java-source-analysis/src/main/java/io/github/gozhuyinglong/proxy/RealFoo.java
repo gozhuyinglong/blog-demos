@@ -7,9 +7,9 @@ package io.github.gozhuyinglong.proxy;
 public class RealFoo implements Foo {
 
     @Override
-    public String sayHello(String name) {
-        System.out.println("invoke sayHello()");
-        return "hello," + name;
+    public String ping() {
+        System.out.println("ping");
+        return "pong";
     }
 
 }

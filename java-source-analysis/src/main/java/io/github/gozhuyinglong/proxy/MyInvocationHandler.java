@@ -22,7 +22,6 @@ public class MyInvocationHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("proxy - " + proxy.getClass());
         System.out.println("method - " + method);
-        System.out.println("args - " + Arrays.toString(args));
         return method.invoke(target, args);
     }
 }

@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 /**
  * @author ZhuYinglong
@@ -23,7 +22,7 @@ public class ProxyTest {
                 .newInstance(new MyInvocationHandler(foo));
 
         // 调用sayHello方法，并输出返回值
-        String value = fooProxy.sayHello("杨过");
+        String value = fooProxy.ping();
         System.out.println(value);
 
     }
@@ -35,7 +34,7 @@ public class ProxyTest {
         Foo fooProxy = (Foo) Proxy.newProxyInstance(Foo.class.getClassLoader(),
                 new Class[]{Foo.class},
                 new MyInvocationHandler(foo));
-        String value = fooProxy.sayHello("小龙女");
+        String value = fooProxy.ping();
         System.out.println(value);
     }
 
@@ -46,7 +45,7 @@ public class ProxyTest {
         Foo fooProxy = (Foo) Proxy.newProxyInstance(Foo.class.getClassLoader(),
                 new Class[]{Foo.class},
                 (proxy, method, args) -> method.invoke(foo, args));
-        String value = fooProxy.sayHello("雕兄");
+        String value = fooProxy.ping();
         System.out.println(value);
     }
 }
