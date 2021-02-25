@@ -7,7 +7,7 @@ package io.github.gozhuyinglong.proxy;
 public class RealFoo implements Foo {
 
     @Override
-    public String ping() {
+    public String ping(String name) {
         System.out.println("ping");
         return "pong";
     }

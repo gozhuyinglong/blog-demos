@@ -21,8 +21,8 @@ public class ProxyTest {
         Foo fooProxy = (Foo) proxyClass.getConstructor(InvocationHandler.class)
                 .newInstance(new MyInvocationHandler(foo));
 
-        // 调用sayHello方法，并输出返回值
-        String value = fooProxy.ping();
+        // 调用 ping 方法，并输出返回值
+        String value = fooProxy.ping("杨过");
         System.out.println(value);
 
     }
@@ -34,7 +34,7 @@ public class ProxyTest {
         Foo fooProxy = (Foo) Proxy.newProxyInstance(Foo.class.getClassLoader(),
                 new Class[]{Foo.class},
                 new MyInvocationHandler(foo));
-        String value = fooProxy.ping();
+        String value = fooProxy.ping("小龙女");
         System.out.println(value);
     }
 
@@ -45,7 +45,7 @@ public class ProxyTest {
         Foo fooProxy = (Foo) Proxy.newProxyInstance(Foo.class.getClassLoader(),
                 new Class[]{Foo.class},
                 (proxy, method, args) -> method.invoke(foo, args));
-        String value = fooProxy.ping();
+        String value = fooProxy.ping("雕兄");
         System.out.println(value);
     }
 }
