@@ -1,8 +1,9 @@
 package io.github.gozhuyinglong.importanalysis.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
+import javax.annotation.Resource;
 
 /**
  * @author 码农StayUp
@@ -15,20 +16,17 @@ import org.springframework.context.annotation.Import;
         MyImportBeanDefinitionRegistrar.class})
 public class Config {
 
-    @Autowired
+    @Resource
     ConfigA configA;
 
-    @Autowired
+    @Resource
+    ConfigB configB;
+
+    @Resource
     ConfigC configC;
 
-    @Autowired
+    @Resource
     ConfigD configD;
-
-    final ConfigB configB;
-
-    public Config(ConfigB configB) {
-        this.configB = configB;
-    }
 
     public void print() {
         configA.print();
