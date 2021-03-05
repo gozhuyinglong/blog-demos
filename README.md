@@ -37,5 +37,4 @@
 
 ## Spring源码解析
 
-* [@Import注解：导入配置类的四种方式&源码解析
-](https://mp.weixin.qq.com/s/DcWEo6-7-W1yFpEdkcwIJQ)
+* [@Import注解：导入配置类的四种方式&源码解析](https://mp.weixin.qq.com/s/DcWEo6-7-W1yFpEdkcwIJQ)
