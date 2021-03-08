@@ -3,7 +3,7 @@
 2. 这个代码仓库里是博客中涉及的源码、文件等
 3. 如果对您有帮助，请给个Star，谢谢您！
 
-![](https://raw.githubusercontent.com/gozhuyinglong/gozhuyinglong.github.io/main/qrcode_for_gh_0d3e241c6f10_258.jpg)
+![](document/qr_code.jpg)
 
 ## 数据结构与算法
 
