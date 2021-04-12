@@ -1,4 +1,4 @@
-package io.github.gozhuyinglong.netty.iomodel;
+package io.github.gozhuyinglong.netty.bio;
 
 import java.io.IOException;
 import java.io.OutputStream;
