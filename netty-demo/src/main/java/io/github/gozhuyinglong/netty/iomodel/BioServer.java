@@ -25,34 +25,41 @@ public class BioServer {
             Socket socket = serverSocket.accept();
             System.out.printf("[%s] - 有一个客户端连上来了\n", Thread.currentThread().getName());
 
-            new Thread(() -> {
-                try {
-                    // 创建缓冲区数组，用于临时存储客户端发来的数据
-                    byte[] bytes = new byte[1024];
-                    // 通过 socket 获取输入流
-                    InputStream inputStream = socket.getInputStream();
-                    while (true) {
-                        // 从输入流中读取数据，并将它们存储到缓冲区数组中。该方法会阻塞，直到输入数据可用、检查到文件结束或抛出异常
-                        int read = inputStream.read(bytes);
-                        if (read != -1) {
-                            String content = new String(bytes, 0, read);
-                            System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
-                        } else {
-                            System.out.printf("[%s] - 连接关闭...\n", Thread.currentThread().getName());
-                            break;
-                        }
-                    }
+            new Thread(() -> socketHandler(socket)).start();
+        }
+    }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        socket.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+    /**
+     * 处理 socket 连接
+     *
+     * @param socket
+     */
+    private static void socketHandler(Socket socket) {
+        try {
+            // 创建缓冲区数组，用于临时存储客户端发来的数据
+            byte[] bytes = new byte[1024];
+            // 通过 socket 获取输入流
+            InputStream inputStream = socket.getInputStream();
+            while (true) {
+                // 从输入流中读取数据，并将它们存储到缓冲区数组中。该方法会阻塞，直到输入数据可用、检查到文件结束或抛出异常
+                int read = inputStream.read(bytes);
+                if (read != -1) {
+                    String content = new String(bytes, 0, read);
+                    System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
+                } else {
+                    System.out.printf("[%s] - 连接关闭...\n", Thread.currentThread().getName());
+                    break;
                 }
-            }).start();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
