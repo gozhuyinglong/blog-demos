@@ -45,9 +45,9 @@ public class BioServer {
             // 循环接消息，直到连接关闭
             while (true) {
                 // 从输入流中读取数据，并将它们存储到缓冲区数组中。该方法会阻塞，直到输入数据可用、检查到文件结束或抛出异常
-                int read = inputStream.read(bytes);
-                if (read != -1) {
-                    String content = new String(bytes, 0, read);
+                int len = inputStream.read(bytes);
+                if (len != -1) {
+                    String content = new String(bytes, 0, len);
                     System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
                 } else {
                     System.out.printf("[%s] - 连接关闭...\n", Thread.currentThread().getName());
