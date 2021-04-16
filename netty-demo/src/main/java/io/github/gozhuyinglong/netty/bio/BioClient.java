@@ -32,6 +32,7 @@ public class BioClient {
             // 将控制台内容写入输出流
             outputStream.write(content.getBytes());
         }
+        outputStream.close();
         scanner.close();
         socket.close();
     }

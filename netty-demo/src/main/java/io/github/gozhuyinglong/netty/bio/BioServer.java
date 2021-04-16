@@ -20,11 +20,13 @@ public class BioServer {
         ServerSocket serverSocket = new ServerSocket(PORT);
         System.out.printf("[%s] - 服务端启动了，端口为：%s\n", Thread.currentThread().getName(), PORT);
 
+        // 循环接收每一个客户端连接，当没有连接时会阻塞
         while (true) {
             // 监听，等待客户端连接。该方法会阻塞，直到建立连接。
             Socket socket = serverSocket.accept();
             System.out.printf("[%s] - 有一个客户端连上来了\n", Thread.currentThread().getName());
 
+            // 为连接创建一个独立的线程，进行接收数据
             new Thread(() -> socketHandler(socket)).start();
         }
     }
@@ -40,6 +42,7 @@ public class BioServer {
             byte[] bytes = new byte[1024];
             // 通过 socket 获取输入流
             InputStream inputStream = socket.getInputStream();
+            // 循环接消息，直到连接关闭
             while (true) {
                 // 从输入流中读取数据，并将它们存储到缓冲区数组中。该方法会阻塞，直到输入数据可用、检查到文件结束或抛出异常
                 int read = inputStream.read(bytes);
@@ -51,7 +54,6 @@ public class BioServer {
                     break;
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
