@@ -24,7 +24,7 @@ public class BioServer {
         while (true) {
             // 监听，等待客户端连接。该方法会阻塞，直到建立连接。
             Socket socket = serverSocket.accept();
-            System.out.printf("[%s] - 有一个客户端连上来了\n", Thread.currentThread().getName());
+            System.out.printf("[%s] - 有一个客户端连上来了 - %s\n", Thread.currentThread().getName(), socket.getRemoteSocketAddress());
 
             // 为连接创建一个独立的线程，进行接收数据
             new Thread(() -> socketHandler(socket)).start();
