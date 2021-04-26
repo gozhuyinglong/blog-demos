@@ -25,7 +25,7 @@ def get_prefix(url):
 
 
 # 递归抓取下一页面
-def spider_next(url, lev):
+def spider_next(url, lev, parent_item_code):
     if lev == 2:
         spider_class = "city"
     elif lev == 3:
@@ -35,26 +35,31 @@ def spider_next(url, lev):
     else:
         spider_class = "village"
 
-    for item in get_html(url).select("tr." + spider_class + "tr"):
-        item_td = item.select("td")
-        item_td_code = item_td[0].select_one("a")
-        item_td_name = item_td[1].select_one("a")
-        if item_td_code is None:
-            item_href = None
-            item_code = item_td[0].text
-            item_name = item_td[1].text
-            if lev == 5:
-                item_name = item_td[2].text
-        else:
-            item_href = item_td_code.get("href")
-            item_code = item_td_code.text
-            item_name = item_td_name.text
-        # 输出：级别、区划代码、名称
-        content2 = str(lev) + "\t" + item_code + "\t" + item_name
-        print(content2)
-        f.write(content2 + "\n")
-        if item_href is not None:
-            spider_next(get_prefix(url) + item_href, lev + 1)
+    item_list = get_html(url).select("tr." + spider_class + "tr")
+    if len(item_list) > 0:
+        for item in item_list:
+            item_td = item.select("td")
+            item_td_code = item_td[0].select_one("a")
+            item_td_name = item_td[1].select_one("a")
+            if item_td_code is None:
+                item_href = None
+                item_code = item_td[0].text
+                item_name = item_td[1].text
+                if lev == 5:
+                    item_name = item_td[2].text
+            else:
+                item_href = item_td_code.get("href")
+                item_code = item_td_code.text
+                item_name = item_td_name.text
+            # 输出：级别、区划代码、名称
+            content2 = str(lev) + "\t" + item_code + "\t" + item_name + "\t" + parent_item_code
+            print(content2)
+            f.write(content2 + "\n")
+            if item_href is not None:
+                spider_next(get_prefix(url) + item_href, lev + 1, item_code)
+    else:
+        spider_next(url, lev + 1, parent_item_code)
+
 
 
 # 入口
@@ -75,6 +80,6 @@ if __name__ == '__main__':
             content = "1\t" + province_code + "\t" + province_name
             print(content)
             f.write(content + "\n")
-            spider_next(get_prefix(province_url) + href, 2)
+            spider_next(get_prefix(province_url) + href, 2, province_code)
     finally:
         f.close()
