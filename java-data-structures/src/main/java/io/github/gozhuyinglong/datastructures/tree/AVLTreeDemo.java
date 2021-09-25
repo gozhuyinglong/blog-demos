@@ -4,7 +4,7 @@ package io.github.gozhuyinglong.datastructures.tree;
 /**
  * AVL树（平衡二叉树）
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/12/14 0014
  */
 public class AVLTreeDemo {

@@ -6,7 +6,7 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.util.Scanner;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/4/22 0022
  */
 public class AioClient {

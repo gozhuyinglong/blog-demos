@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.designpatterns.singleton;
 /**
  * 单例模式 - 双重校验锁（double-checked-locking）
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/12/7 0007
  */
 public class SingletonDCL {

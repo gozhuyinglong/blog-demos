@@ -1,7 +1,7 @@
 package io.github.gozhuyinglong.proxy;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/2/24 0024
  */
 public class RealFoo implements Foo {

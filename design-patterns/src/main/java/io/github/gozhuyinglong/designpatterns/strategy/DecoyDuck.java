@@ -6,7 +6,7 @@ import io.github.gozhuyinglong.designpatterns.strategy.behavior.QuackNoWay;
 /**
  * 诱饵鸭
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/1/31 0031
  */
 public class DecoyDuck extends Duck {

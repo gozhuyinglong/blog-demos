@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/4/6 0006
  */
 public class BioClient {

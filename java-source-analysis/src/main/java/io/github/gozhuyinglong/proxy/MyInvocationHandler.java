@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/2/24 0024
  */
 public class MyInvocationHandler implements InvocationHandler {

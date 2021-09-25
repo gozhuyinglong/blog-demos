@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 消息摘要工具箱
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/9/23 0023
  */
 public class MDUtil {
@@ -17,7 +17,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 32位十六进制字符串
      */
-    public static String md5(byte[] data) {
+    public static String MD5(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] bytes = md.digest(data);
@@ -34,8 +34,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 32位十六进制字符串
      */
-    public static String md5(String data) {
-        return md5(data.getBytes());
+    public static String MD5(String data) {
+        return MD5(data.getBytes());
     }
 
     /**
@@ -44,7 +44,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 40位十六进制字符串
      */
-    public static String sha1(byte[] data) {
+    public static String SHA1(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             byte[] bytes = md.digest(data);
@@ -61,8 +61,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 40位十六进制字符串
      */
-    public static String sha1(String data) {
-        return sha1(data.getBytes());
+    public static String SHA1(String data) {
+        return SHA1(data.getBytes());
     }
 
     /**
@@ -71,7 +71,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 56位十六进制字符串
      */
-    public static String sha224(byte[] data) {
+    public static String SHA224(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-224");
             byte[] bytes = md.digest(data);
@@ -88,8 +88,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 56位十六进制字符串
      */
-    public static String sha224(String data) {
-        return sha224(data.getBytes());
+    public static String SHA224(String data) {
+        return SHA224(data.getBytes());
     }
 
     /**
@@ -98,7 +98,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 64位十六进制字符串
      */
-    public static String sha256(byte[] data) {
+    public static String SHA256(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] bytes = md.digest(data);
@@ -115,8 +115,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 64位十六进制字符串
      */
-    public static String sha256(String data) {
-        return sha256(data.getBytes());
+    public static String SHA256(String data) {
+        return SHA256(data.getBytes());
     }
 
     /**
@@ -125,7 +125,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 96位十六进制字符串
      */
-    public static String sha384(byte[] data) {
+    public static String SHA384(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-384");
             byte[] bytes = md.digest(data);
@@ -142,8 +142,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 96位十六进制字符串
      */
-    public static String sha384(String data) {
-        return sha384(data.getBytes());
+    public static String SHA384(String data) {
+        return SHA384(data.getBytes());
     }
 
     /**
@@ -152,7 +152,7 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 128位十六进制字符串
      */
-    public static String sha512(byte[] data) {
+    public static String SHA512(byte[] data) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             byte[] bytes = md.digest(data);
@@ -169,8 +169,8 @@ public class MDUtil {
      * @param data 要加密的数据
      * @return 128位十六进制字符串
      */
-    public static String sha512(String data) {
-        return sha512(data.getBytes());
+    public static String SHA512(String data) {
+        return SHA512(data.getBytes());
     }
 
     /**
@@ -193,11 +193,11 @@ public class MDUtil {
 
 
     public static void main(String[] args) {
-        System.out.println("MD5\t\t" + md5("123456"));
-        System.out.println("SHA-1\t" + sha1("123456"));
-        System.out.println("SHA-224\t" + sha224("123456"));
-        System.out.println("SHA-256\t" + sha256("123456"));
-        System.out.println("SHA-384\t" + sha384("123456"));
-        System.out.println("SHA-512\t" + sha512("123456"));
+        System.out.println("MD5\t\t" + MD5("123456"));
+        System.out.println("SHA-1\t" + SHA1("123456"));
+        System.out.println("SHA-224\t" + SHA224("123456"));
+        System.out.println("SHA-256\t" + SHA256("123456"));
+        System.out.println("SHA-384\t" + SHA384("123456"));
+        System.out.println("SHA-512\t" + SHA512("123456"));
     }
 }

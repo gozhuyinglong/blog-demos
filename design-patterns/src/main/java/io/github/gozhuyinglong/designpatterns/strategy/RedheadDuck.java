@@ -6,7 +6,7 @@ import io.github.gozhuyinglong.designpatterns.strategy.behavior.QuackGuaGua;
 /**
  * 红头鸭
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/1/31 0031
  */
 public class RedheadDuck extends Duck {

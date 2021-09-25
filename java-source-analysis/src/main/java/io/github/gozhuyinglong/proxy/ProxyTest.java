@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 /**
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2021/2/24 0024
  */
 public class ProxyTest {

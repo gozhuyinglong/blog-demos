@@ -3,7 +3,7 @@ package io.github.gozhuyinglong.designpatterns.factory;
 /**
  * 简单工厂模式
  *
- * @author ZhuYinglong
+ * @author 码农StayUp
  * @date 2020/12/8 0008
  */
 public class FactorySimple {
