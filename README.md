@@ -44,3 +44,7 @@
 * [75张图带你了解网络设备、网络地址规划、静态路由、实战演练](https://mp.weixin.qq.com/s/9McysTuIFQ984Asy2FxB9g)
 * [36张图详解网络基础知识](https://mp.weixin.qq.com/s/H7FQXsPxtHcYUzK-cHBo9g)
 * [浅聊Linux的五种IO模型](https://mp.weixin.qq.com/s/IrY6u8CIkYN2Rv-kKeMtMA)
+
+## 信息安全
+
+* [一文搞懂单向散列函数](https://mp.weixin.qq.com/s/LrhMAXfxhnlPLxv9B_39sg)
