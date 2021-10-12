@@ -33,6 +33,7 @@ public class RedisTest {
         System.out.println(o);
         // 转换为 Person 对象
         Person person = JSON.parseObject((String) o, Person.class);
-        System.out.println(JSON.toJSONString(person));
+        assert person != null;
+        System.out.println(person.toString());
     }
 }
