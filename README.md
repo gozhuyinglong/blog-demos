@@ -48,3 +48,4 @@
 ## 信息安全
 
 * [一文搞懂单向散列函数](https://mp.weixin.qq.com/s/LrhMAXfxhnlPLxv9B_39sg)
+* [一文搞懂对称加密：加密算法、工作模式、填充方式、代码实现](https://mp.weixin.qq.com/s/Jr3aKhd9NEIZ7quWmBJAow)
