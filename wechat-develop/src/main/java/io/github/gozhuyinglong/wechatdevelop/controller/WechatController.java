@@ -1,6 +1,8 @@
 package io.github.gozhuyinglong.wechatdevelop.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import io.github.gozhuyinglong.wechatdevelop.dto.TokenDTO;
+import io.github.gozhuyinglong.wechatdevelop.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -38,7 +39,7 @@ public class WechatController {
     }
 
     @GetMapping("/accessToken")
-    public String accessToken(String code) {
+    public TokenDTO accessToken(String code) {
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                 "appid=" + APP_ID +
                 "&secret=" + APP_SECRET +
@@ -60,7 +61,14 @@ public class WechatController {
 
         // 获取微信用户信息
         userinfo(accessToken, openid);
-        return openid;
+
+        // 封装 TokenDTO 类
+        TokenDTO dto = new TokenDTO();
+        dto.setToken(JwtUtil.generateToken(openid));
+        dto.setTokenHeader(JwtUtil.TOKEN_HEADER);
+        dto.setTokenPrefix(JwtUtil.TOKEN_PREFIX);
+        dto.setTtl(JwtUtil.TTL);
+        return dto;
     }
 
     private void userinfo(String accessToken, String openid) {
