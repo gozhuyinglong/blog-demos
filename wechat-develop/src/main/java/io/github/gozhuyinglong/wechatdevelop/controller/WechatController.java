@@ -24,8 +24,8 @@ public class WechatController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/code")
-    public void code(HttpServletResponse response) throws IOException {
+    @GetMapping("/authorize")
+    public void authorize(HttpServletResponse response) throws IOException {
 
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" + APP_ID +
@@ -38,8 +38,7 @@ public class WechatController {
     }
 
     @GetMapping("/accessToken")
-    public String accessToken(HttpServletRequest request, HttpServletResponse response) {
-        String code = request.getParameter("code");
+    public String accessToken(String code) {
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                 "appid=" + APP_ID +
                 "&secret=" + APP_SECRET +
@@ -60,11 +59,11 @@ public class WechatController {
         String scope = json.getString("scope");
 
         // 获取微信用户信息
-        userInfo(accessToken, openid);
+        userinfo(accessToken, openid);
         return openid;
     }
 
-    private void userInfo(String accessToken, String openid) {
+    private void userinfo(String accessToken, String openid) {
         String url = "https://api.weixin.qq.com/sns/userinfo?" +
                 "access_token=" + accessToken +
                 "&openid=" + openid +
