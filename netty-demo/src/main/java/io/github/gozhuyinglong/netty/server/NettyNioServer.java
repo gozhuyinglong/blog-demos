@@ -1,12 +1,15 @@
 package io.github.gozhuyinglong.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 /**
  * @author 码农StayUp
@@ -33,6 +36,10 @@ public class NettyNioServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() { // 设置 childHandler，用于处理具体的 Channel 的请求
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+//                            ch.pipeline().addLast(new FixedLengthFrameDecoder(48));
+//                            ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+//                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer("$".getBytes())));
+                            ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024, 0, 1));
                             ch.pipeline().addLast(new NettyNioServerHandler()); // 添加 I/O 事件的处理器
                         }
 
