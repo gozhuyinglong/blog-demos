@@ -45,10 +45,13 @@ public class NettyNioClientHandler extends ChannelInboundHandlerAdapter {
 //            ctx.writeAndFlush(byteBuf);
 //        }
 
+        // 4.测试 LengthFieldBasedFrameDecoder
         for (int i = 0; i < 10; i++) {
-            byte[] head = ByteBufUtil.decodeHexDump("30");
-            ByteBuf byteBuf = Unpooled.copiedBuffer(head);
-            byteBuf.writeBytes(Unpooled.copiedBuffer("服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8)));
+
+            byte[] header = ByteBufUtil.decodeHexDump("EE");
+            byte[] length = ByteBufUtil.decodeHexDump("0030");
+            byte[] data = "服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8);
+            ByteBuf byteBuf = Unpooled.copiedBuffer(header, length, data);
             ctx.writeAndFlush(byteBuf);
         }
     }
