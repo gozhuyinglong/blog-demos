@@ -1,4 +1,4 @@
-package io.github.gozhuyinglong.netty.nio;
+package io.github.gozhuyinglong.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

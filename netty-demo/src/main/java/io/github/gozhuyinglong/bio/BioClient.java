@@ -1,4 +1,4 @@
-package io.github.gozhuyinglong.netty.bio;
+package io.github.gozhuyinglong.bio;
 
 import java.io.IOException;
 import java.io.OutputStream;
