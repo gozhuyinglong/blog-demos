@@ -41,7 +41,7 @@ public class NettyNioServer {
 //                            ch.pipeline().addLast(new FixedLengthFrameDecoder(48));
 //                            ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
 //                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer("$".getBytes())));
-                            ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024, 1, 2, 0, 3));
+//                            ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(1024, 1, 2, 0, 3));
                             ch.pipeline().addLast(new NettyNioServerHandler()); // 添加 I/O 事件的处理器
                         }
 

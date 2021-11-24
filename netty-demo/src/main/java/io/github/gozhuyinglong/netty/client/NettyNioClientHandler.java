@@ -20,11 +20,17 @@ public class NettyNioClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("连接成功...");
 
-        // 0.正常
-//        for (int i = 0; i < 10; i++) {
+        // 正常
+        for (int i = 0; i < 10; i++) {
+            ByteBuf byteBuf = Unpooled.copiedBuffer("服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8));
+            ctx.writeAndFlush(byteBuf);
+            TimeUnit.SECONDS.sleep(1);
+        }
+
+        // 发生粘包/拆包
+//        for (int i = 0; i < 100; i++) {
 //            ByteBuf byteBuf = Unpooled.copiedBuffer("服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8));
 //            ctx.writeAndFlush(byteBuf);
-//            TimeUnit.SECONDS.sleep(1);
 //        }
 
         // 1.测试 FixedLengthFrameDecoder
@@ -46,14 +52,13 @@ public class NettyNioClientHandler extends ChannelInboundHandlerAdapter {
 //        }
 
         // 4.测试 LengthFieldBasedFrameDecoder
-        for (int i = 0; i < 10; i++) {
-
-            byte[] header = ByteBufUtil.decodeHexDump("EE");
-            byte[] length = ByteBufUtil.decodeHexDump("0030");
-            byte[] data = "服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8);
-            ByteBuf byteBuf = Unpooled.copiedBuffer(header, length, data);
-            ctx.writeAndFlush(byteBuf);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            byte[] header = ByteBufUtil.decodeHexDump("EE");
+//            byte[] length = ByteBufUtil.decodeHexDump("0030");
+//            byte[] data = "服务器你好，我是一条完整的消息！".getBytes(StandardCharsets.UTF_8);
+//            ByteBuf byteBuf = Unpooled.copiedBuffer(header, length, data);
+//            ctx.writeAndFlush(byteBuf);
+//        }
     }
 
     @Override
