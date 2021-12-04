@@ -3,6 +3,7 @@ package io.github.gozhuyinglong.bio;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,8 +17,10 @@ public class BioServer {
 
     public static void main(String[] args) throws IOException {
 
-        // 为服务端创建 ServerSocket，并指定端口
-        ServerSocket serverSocket = new ServerSocket(PORT);
+        // 为服务端创建 ServerSocket
+        ServerSocket serverSocket = new ServerSocket();
+        // 绑定本地端口
+        serverSocket.bind(new InetSocketAddress(PORT));
         System.out.printf("[%s] - 服务端启动了，端口为：%s\n", Thread.currentThread().getName(), PORT);
 
         // 循环接收每一个客户端连接，当没有连接时会阻塞

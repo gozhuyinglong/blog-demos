@@ -2,6 +2,7 @@ package io.github.gozhuyinglong.bio;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -16,8 +17,10 @@ public class BioClient {
 
     public static void main(String[] args) throws IOException {
 
-        // 创建 Socket，并指向服务端主机地址及端口
-        Socket socket = new Socket(HOST, PORT);
+        // 创建 Socket
+        Socket socket = new Socket();
+        // 连接远程端点
+        socket.connect(new InetSocketAddress(HOST, PORT));
         System.out.printf("连接成功，主机：%s，端口：%s\n", HOST, PORT);
         // 获取输出流
         OutputStream outputStream = socket.getOutputStream();
