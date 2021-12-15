@@ -18,13 +18,14 @@ public class NioClient {
     public static void main(String[] args) throws IOException {
 
         // 打开一个 Socket 通道，并绑定指定的服务端地址与端口
-        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress(HOST, PORT));
+        SocketChannel socketChannel = SocketChannel.open();
         // 将该通道设为非阻塞
         socketChannel.configureBlocking(false);
+        // 连接远程地址
+        socketChannel.connect(new InetSocketAddress(HOST, PORT));
 
         // 申请一个1024字节的缓冲区
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-
         // 获取控制台输入内容
         Scanner scanner = new Scanner(System.in);
         while (true) {
