@@ -45,8 +45,10 @@ public class AioServer {
                     // 一个客户端连接后，继续接收下一个连接
                     attachment.acceptHandler();
                     System.out.printf("[%s] - 有一个客户端连上来了 - %s\n", Thread.currentThread().getName(), result.getRemoteAddress());
+                    // 申请一个1024个字节的缓冲区
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                     // Socket处理器
-                    socketHandler(result);
+                    result.read(byteBuffer, byteBuffer, new SocketHandler(result));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -62,40 +64,43 @@ public class AioServer {
     }
 
     /**
-     * Socket 处理器
-     * @param socketChannel
+     * Socket 处理类
      */
-    private void socketHandler(AsynchronousSocketChannel socketChannel) {
-        // 申请一个1024个字节的缓冲区
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-        // 读取该通道的内容至缓冲区（将内容写入缓冲区），若有客户端写入内容，会自动通知到 CompletionHandler 进行处理。注：该操作不会阻塞
-        socketChannel.read(byteBuffer, byteBuffer, new CompletionHandler<Integer, ByteBuffer>() {
-            @Override
-            public void completed(Integer result, ByteBuffer attachment) {
-                // 继续读取该客户的消息
-                socketHandler(socketChannel);
-                // 将缓冲区进行反转（刚才是写入，反转后变为读取）
-                attachment.flip();
-                // 读取缓冲区中的内容，并转为字符串
-                String content = new String(attachment.array(), 0, attachment.limit());
-                System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
-                // 清除缓冲区
-                attachment.clear();
+    static class SocketHandler implements CompletionHandler<Integer, ByteBuffer> {
+
+        private final AsynchronousSocketChannel asynchronousSocketChannel;
+
+        SocketHandler(AsynchronousSocketChannel asynchronousSocketChannel) {
+            this.asynchronousSocketChannel = asynchronousSocketChannel;
+        }
+
+        @Override
+        public void completed(Integer result, ByteBuffer attachment) {
+            // 申请一个1024个字节的缓冲区
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+            // 继续读取下一报文
+            asynchronousSocketChannel.read(byteBuffer, byteBuffer, new SocketHandler(asynchronousSocketChannel));
+
+            // 将缓冲区进行反转（刚才是写入，反转后变为读取）
+            attachment.flip();
+            // 读取缓冲区中的内容，并转为字符串
+            String content = new String(attachment.array(), 0, result);
+            System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
+            // 清除缓冲区
+            attachment.clear();
+
+        }
+
+        @Override
+        public void failed(Throwable exc, ByteBuffer attachment) {
+            System.out.printf("[%s] - 客户端断开连接！\n", Thread.currentThread().getName());
+            try {
+                // 关闭当前 Socket 通道
+                asynchronousSocketChannel.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            @Override
-            public void failed(Throwable exc, ByteBuffer attachment) {
-                System.out.printf("[%s] - 客户端断开连接！\n", Thread.currentThread().getName());
-                try {
-                    // 关闭当前 Socket 通道
-                    socketChannel.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
+        }
     }
 
 
