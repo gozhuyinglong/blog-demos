@@ -66,11 +66,17 @@ public class AioServer {
 
         @Override
         public void completed(Integer result, ByteBuffer attachment) {
-            // 申请一个1024个字节的缓冲区
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-            // 继续读取下一报文
-            asynchronousSocketChannel.read(byteBuffer, byteBuffer, new ReadCompletionHandler(asynchronousSocketChannel));
-
+            // 客户端关闭通道，字节数为-1
+            if(result == -1) {
+                System.out.printf("[%s] - 客户端断开连接！\n", Thread.currentThread().getName());
+                try {
+                    // 关闭当前 Socket 通道
+                    asynchronousSocketChannel.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
             // 将缓冲区进行反转（刚才是写入，反转后变为读取）
             attachment.flip();
             // 读取缓冲区中的内容，并转为字符串
@@ -78,7 +84,8 @@ public class AioServer {
             System.out.printf("[%s] - 接收客户端发来的内容：%s\n", Thread.currentThread().getName(), content);
             // 清除缓冲区
             attachment.clear();
-
+            // 继续读取下一报文
+            asynchronousSocketChannel.read(attachment, attachment, new ReadCompletionHandler(asynchronousSocketChannel));
         }
 
         @Override
