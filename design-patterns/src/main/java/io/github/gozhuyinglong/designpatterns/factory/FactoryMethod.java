@@ -8,6 +8,9 @@ package io.github.gozhuyinglong.designpatterns.factory;
  */
 public class FactoryMethod {
 
+    /**
+     * 手机接口
+     */
     private interface Phone {
 
         /**
@@ -21,6 +24,9 @@ public class FactoryMethod {
         void sendSMS();
     }
 
+    /**
+     * 小米手机实现类
+     */
     private static class XiaomiPhone implements Phone {
         @Override
         public void call() {
@@ -33,6 +39,9 @@ public class FactoryMethod {
         }
     }
 
+    /**
+     * 红米手机实现类
+     */
     private static class RedmiPhone implements Phone {
         @Override
         public void call() {
@@ -45,6 +54,9 @@ public class FactoryMethod {
         }
     }
 
+    /**
+     * 手机工厂接口
+     */
     private interface PhoneFactory {
         /**
          * 获取手机实例
@@ -54,6 +66,9 @@ public class FactoryMethod {
         Phone getPhone();
     }
 
+    /**
+     * 小米手机工厂类
+     */
     private static class XiaomiPhoneFactory implements PhoneFactory {
         @Override
         public Phone getPhone() {
@@ -61,6 +76,9 @@ public class FactoryMethod {
         }
     }
 
+    /**
+     * 红米手机工厂类
+     */
     private static class RedmiPhoneFactory implements PhoneFactory {
         @Override
         public Phone getPhone() {
