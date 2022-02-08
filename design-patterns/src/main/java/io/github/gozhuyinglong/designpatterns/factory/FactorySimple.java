@@ -65,7 +65,7 @@ public class FactorySimple {
          * @param type
          * @return
          */
-        public Phone getPhone(String type) {
+        public static Phone createPhone(String type) {
             switch (type) {
                 case "xiaomi":
                     return new XiaomiPhone();
@@ -78,17 +78,15 @@ public class FactorySimple {
     }
 
     public static void main(String[] args) {
-        PhoneFactory phoneFactory = new PhoneFactory();
-
         System.out.println("================小米手机================");
-        Phone xiaomiPhone = phoneFactory.getPhone("xiaomi");
+        Phone xiaomiPhone = PhoneFactory.createPhone("xiaomi");
         if (xiaomiPhone != null) {
             xiaomiPhone.call();
             xiaomiPhone.sendSMS();
         }
 
         System.out.println("================红米手机================");
-        Phone redmiPhone = phoneFactory.getPhone("redmi");
+        Phone redmiPhone = PhoneFactory.createPhone("redmi");
         if (redmiPhone != null) {
             redmiPhone.call();
             redmiPhone.sendSMS();

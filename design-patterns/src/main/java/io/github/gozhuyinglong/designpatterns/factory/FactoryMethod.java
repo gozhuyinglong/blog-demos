@@ -63,7 +63,7 @@ public class FactoryMethod {
          *
          * @return
          */
-        Phone getPhone();
+        Phone createPhone();
     }
 
     /**
@@ -71,7 +71,7 @@ public class FactoryMethod {
      */
     private static class XiaomiPhoneFactory implements PhoneFactory {
         @Override
-        public Phone getPhone() {
+        public Phone createPhone() {
             return new XiaomiPhone();
         }
     }
@@ -81,19 +81,19 @@ public class FactoryMethod {
      */
     private static class RedmiPhoneFactory implements PhoneFactory {
         @Override
-        public Phone getPhone() {
+        public Phone createPhone() {
             return new RedmiPhone();
         }
     }
 
     public static void main(String[] args) {
         System.out.println("================小米手机================");
-        Phone xiaomiPhone = new XiaomiPhoneFactory().getPhone();
+        Phone xiaomiPhone = new XiaomiPhoneFactory().createPhone();
         xiaomiPhone.call();
         xiaomiPhone.sendSMS();
 
         System.out.println("================红米手机================");
-        Phone redmiPhone = new RedmiPhoneFactory().getPhone();
+        Phone redmiPhone = new RedmiPhoneFactory().createPhone();
         redmiPhone.call();
         redmiPhone.sendSMS();
     }
